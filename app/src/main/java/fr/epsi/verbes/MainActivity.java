@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
     if (requestCode == 1 || requestCode == 2) {
       String nom = data.getStringExtra("nom");
       String prenom = data.getStringExtra("prenom");
+      String joueurId = data.getStringExtra("joueurId");
       Log.w("verbesLog", nom);
       Log.w("verbesLog", prenom);
+      Log.w("verbesLog/joueurId", joueurId);
       TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
       welcomeLine.setVisibility(View.VISIBLE);
       welcomeLine.setText("Bienvenue " + prenom + " " + nom);
