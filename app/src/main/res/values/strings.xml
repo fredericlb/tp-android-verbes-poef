@@ -3,6 +3,7 @@
   <string name="btn_subscribe">Inscription</string>
   <string name="btn_connect">Connexion</string>
   <string name="btn_revision">Mode révision</string>
+  <string name="btn_game">Commencer la partie</string>
   <string name="input_firstname">Prénom</string>
   <string name="input_lastname">Nom</string>
   <string name="input_mail">Mail</string>
@@ -10,4 +11,8 @@
   <string name="input_password">Mot de passe</string>
   <string name="btn_submit_subscription">Je m\'inscris</string>
   <string name="btn_submit_connection">Connexion</string>
+
+  <string name="input_preterit">Prétérit</string>
+  <string name="input_participe_passe">Participe passé</string>
+  <string name="btn_submit_question">Valider</string>
 </resources>
