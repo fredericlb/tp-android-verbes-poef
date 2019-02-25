@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     startActivityForResult(intent, 2);
   }
 
+  public void onRevisionBtnClicked(View v) {
+    Intent intent = new Intent(this, Revisions.class);
+    startActivity(intent);
+  }
+
   public void onPartieBtnClicked(View v) {
 
     String url = "http://10.0.2.2:8000/partie/" + this.playerId;

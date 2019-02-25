@@ -15,4 +15,5 @@
   <string name="input_preterit">Prétérit</string>
   <string name="input_participe_passe">Participe passé</string>
   <string name="btn_submit_question">Valider</string>
+    <string name="title_activity_revisions">Revisions</string>
 </resources>

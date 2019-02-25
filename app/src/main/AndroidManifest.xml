@@ -12,7 +12,11 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true">
-    <activity android:name=".QuestionActivity"></activity>
+    <activity
+      android:name=".Revisions"
+      android:label="@string/title_activity_revisions"
+      android:theme="@style/AppTheme.NoActionBar"></activity>
+    <activity android:name=".QuestionActivity" />
     <activity android:name=".ConnexionActivity" />
     <activity android:name=".InscriptionActivity" />
     <activity android:name=".MainActivity">
