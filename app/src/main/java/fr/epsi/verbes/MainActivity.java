@@ -1,9 +1,14 @@
 package fr.epsi.verbes;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     Button btn = (Button) findViewById(R.id.btnDisconnect);
     btn.setEnabled(false);
 
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+      NotificationChannel channel = new NotificationChannel("test", "Test",
+              NotificationManager.IMPORTANCE_DEFAULT);
+      getSystemService(NotificationManager.class).createNotificationChannel(channel);
+    }
+
     SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE);
     if (sp.contains("joueurId")) {
       String joueurId = sp.getString("joueurId", null);
@@ -41,6 +52,27 @@ public class MainActivity extends AppCompatActivity {
       btn.setEnabled(true);
     }
   }
+
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
+
+    Intent intent = new Intent(this, MainActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "test");
+    builder
+            .setContentTitle("Reviens !")
+            .setContentText("Reviens dans l'application")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent);
+
+    NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+    manager.notify(100, builder.build());
+
+  }
+
 
   public void onDisconnectPressed(View v) {
     SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE);
