@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
     welcomeLine.setVisibility(View.INVISIBLE);
+    Button btn = (Button) findViewById(R.id.btnDisconnect);
+    btn.setEnabled(false);
 
     SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE);
     if (sp.contains("joueurId")) {
@@ -35,7 +38,22 @@ public class MainActivity extends AppCompatActivity {
       String prenom = sp.getString("prenom", null);
       this.updateUserInfo(prenom, nom);
       this.playerId = joueurId;
+      btn.setEnabled(true);
     }
+  }
+
+  public void onDisconnectPressed(View v) {
+    SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE);
+    sp.edit()
+            .remove("joueurId")
+            .remove("prenom")
+            .remove("nom")
+            .apply();
+    TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
+    welcomeLine.setVisibility(View.INVISIBLE);
+
+    Button btn = (Button) findViewById(R.id.btnDisconnect);
+    btn.setEnabled(false);
   }
 
   public void onInscriptionBtnClicked(View v) {
@@ -96,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
       Log.w("verbesLog", prenom);
       Log.w("verbesLog/joueurId", joueurId);
       this.updateUserInfo(prenom, nom);
+      Button btn = (Button) findViewById(R.id.btnDisconnect);
+      btn.setEnabled(true);
     }
   }
 }

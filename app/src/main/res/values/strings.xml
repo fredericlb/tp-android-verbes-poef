@@ -19,4 +19,6 @@
 
     <string name="label_score">...</string>
     <string name="btn_home">Accueil</string>
+
+    <string name="btn_logout">Déconnecter</string>
 </resources>
