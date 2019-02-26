@@ -1,6 +1,8 @@
 package fr.epsi.verbes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
     welcomeLine.setVisibility(View.INVISIBLE);
+
+    SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE);
+    if (sp.contains("joueurId")) {
+      String joueurId = sp.getString("joueurId", null);
+      String nom = sp.getString("nom", null);
+      String prenom = sp.getString("prenom", null);
+      this.updateUserInfo(prenom, nom);
+      this.playerId = joueurId;
+    }
   }
 
   public void onInscriptionBtnClicked(View v) {
@@ -66,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+  protected void updateUserInfo(String prenom, String nom) {
+    TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
+    welcomeLine.setVisibility(View.VISIBLE);
+    welcomeLine.setText("Bienvenue " + prenom + " " + nom);
+  }
+
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -78,9 +95,7 @@ public class MainActivity extends AppCompatActivity {
       Log.w("verbesLog", nom);
       Log.w("verbesLog", prenom);
       Log.w("verbesLog/joueurId", joueurId);
-      TextView welcomeLine = (TextView) findViewById(R.id.welcomeLine);
-      welcomeLine.setVisibility(View.VISIBLE);
-      welcomeLine.setText("Bienvenue " + prenom + " " + nom);
+      this.updateUserInfo(prenom, nom);
     }
   }
 }

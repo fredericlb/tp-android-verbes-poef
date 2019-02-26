@@ -1,7 +1,9 @@
 package fr.epsi.verbes;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +51,15 @@ public class ConnexionActivity extends AppCompatActivity {
           Log.w("verbsLog", "bad mail or password");
         } else {
           intent.putExtra("joueurId", response);
+
           setResult(Activity.RESULT_OK, intent);
+          SharedPreferences sp = getSharedPreferences("app", Context.MODE_PRIVATE );
+          sp.edit()
+            .putString("joueurId", response)
+            .putString("nom", "Langlade")
+            .putString("prenom", "Frédéric")
+            .apply();
+
           finish();
         }
       }
