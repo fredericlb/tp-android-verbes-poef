@@ -1,5 +1,6 @@
 package fr.epsi.verbes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,15 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         this.fetchNewVerb();
+        final Intent intent = new Intent(this, ScoreActivity.class);
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                intent.putExtra("partieId", getIntent().getStringExtra("partieId"));
+                finish();
+                startActivity(intent);
+            }
+        }, 20000);
     }
 
     public void updateUI() {
